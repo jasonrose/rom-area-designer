@@ -1,4 +1,5 @@
 import React from 'react'
+import { connect } from 'nuclear-js-react-addons'
 
 import Toolbar from './toolbar'
 
@@ -13,4 +14,10 @@ class Designer extends React.Component {
   }
 }
 
-export default Designer
+function mapStateToProps(props) {
+  return {}
+}
+
+const connectedDesigner = connect(mapStateToProps)(Designer)
+
+export default connectedDesigner

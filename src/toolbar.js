@@ -1,22 +1,41 @@
 import React from 'react'
-
+import { connect } from 'nuclear-js-react-addons'
+import classnames from 'classnames'
+import getters from './getters.js'
 import AreaToolbar from './area-toolbar'
+import ToolbarTab from './toolbar-tab'
 
 class Toolbar extends React.Component {
+  getActiveToolbarBody(selectedToolbarTab) {
+    switch(selectedToolbarTab) {
+      case 'area-tab': return <AreaToolbar />
+      default: return <div></div>
+    }
+  }
+
   render() {
+    const toolbarBody = this.getActiveToolbarBody(this.props.uiState.get('selectedToolbarTab'))
     return (
       <div id="toolbar">
         <nav role="navigation">
           <ul className="list-unstyled list-inline tabs">
-            <li><a className="current-item">Area</a></li>
-            <li><a>Rooms</a></li>
-            <li><a>Mobs</a></li>
+            <ToolbarTab id="area-tab" text="Area" />
+            <ToolbarTab id="rooms-tab" text="Rooms" />
+            <ToolbarTab id="mobs-tab" text="Mobs" />
           </ul>
         </nav>
-        <AreaToolbar />
+        {toolbarBody}
       </div>
     )
   }
 }
 
-export default Toolbar
+function mapStateToProps(props) {
+  return {
+    uiState: getters.uiState
+  }
+}
+
+const connectedToolbar = connect(mapStateToProps)(Toolbar)
+
+export default connectedToolbar
