@@ -1,5 +1,19 @@
 @import 'yeticss'
 
-body
-  border: 10px solid $gray-lighter
+#root, .main
+  min-height: 100vh
+  min-width: 100vh
 
+.main
+  display: flex
+  flex-flow: row wrap
+
+#toolbar, #map
+  padding: 10px
+
+#toolbar
+  flex: 0 0 20em
+  border-right: 3px solid $gray-lighter
+
+#map
+  flex: 1

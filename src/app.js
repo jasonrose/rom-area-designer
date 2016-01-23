@@ -2,5 +2,6 @@ require('./styles.styl')
 
 import React from 'react'
 import {render} from 'react-dom'
+import Designer from './designer'
 
-render(<div>Hello</div>, document.getElementById('root'))
+render(<Designer />, document.getElementById('root'))
