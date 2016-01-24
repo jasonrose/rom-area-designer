@@ -1,24 +1,33 @@
 import reactor from './reactor'
-import actions from './action-types'
+import actionTypes from './action-types'
 
 export default {
   selectToolbarTab(areaName) {
-    reactor.dispatch(actions.TOOLBAR_TAB_SELECTED, { areaName: areaName })
+    reactor.dispatch(actionTypes.TOOLBAR_TAB_SELECTED, { areaName: areaName })
+  },
+
+  selectRoom(roomId) {
+    reactor.dispatch(actionTypes.ROOM_SELECTED, roomId)
+  },
+
+  addRoom(roomId, direction) {
+    reactor.dispatch(actionTypes.ADD_ROOM, {roomId, direction})
+    reactor.dispatch(actionTypes.ROOM_SELECTED, null)
   },
 
   changeAreaName(name) {
-    reactor.dispatch(actions.SET_AREA_NAME, name)
+    reactor.dispatch(actionTypes.SET_AREA_NAME, name)
   },
 
   changeAreaMinimumLevel(level) {
-    reactor.dispatch(actions.SET_AREA_MINIMUM_LEVEL, level)
+    reactor.dispatch(actionTypes.SET_AREA_MINIMUM_LEVEL, level)
   },
 
   changeAreaMaximumLevel(level) {
-    reactor.dispatch(actions.SET_AREA_MAXIMUM_LEVEL, level)
+    reactor.dispatch(actionTypes.SET_AREA_MAXIMUM_LEVEL, level)
   },
 
   changeAreaAuthor(name) {
-    reactor.dispatch(actions.SET_AREA_AUTHOR, name)
+    reactor.dispatch(actionTypes.SET_AREA_AUTHOR, name)
   }
 }

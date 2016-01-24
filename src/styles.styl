@@ -1,19 +1,74 @@
 @import 'yeticss'
 
 #root, .main
-  min-height: 100vh
-  min-width: 100vh
+  min-height 100vh
+  min-width 100vh
 
 .main
-  display: flex
-  flex-flow: row wrap
+  display flex
+  flex-flow row wrap
 
 #toolbar, #map
-  padding: 10px
+  padding 10px
 
 #toolbar
-  flex: 0 0 20em
-  border-right: 3px solid $gray-lighter
+  flex 0 0 20em
+  border-right 3px solid $gray-lighter
 
 #map
-  flex: 1
+  flex 1
+  position relative
+  overflow auto
+
+$cell-side = 40px
+$cell-border-width = 2px
+
+.room-cell
+  width $cell-side
+  height $cell-side
+  border $cell-border-width solid black
+  line-height $cell-side - (2 * $cell-border-width)
+  text-align center
+  position absolute
+  cursor pointer
+  user-select none
+  top 50%
+  left 50%
+
+  &.selected
+    border-color $orange
+    background-color $orange-lighter
+
+  &.new-room
+    border-color $blue-saturated-lighter
+    background-color $blue-lighter
+    top initial
+    left initial
+
+  &.room-west
+    margin-left ($cell-side * -1.5) - $cell-border-width
+    margin-top -($cell-border-width)
+
+  &.room-east
+    margin-left ($cell-side * 1.5) - $cell-border-width
+    margin-top -($cell-border-width)
+
+  &.room-north
+    margin-top -($cell-side * 1.5) - $cell-border-width
+    margin-left -($cell-border-width)
+
+  &.room-south
+    margin-top ($cell-side * 1.5) - $cell-border-width
+    margin-left -($cell-border-width)
+
+  .room-text
+    position absolute
+    top 0
+    left 0
+    right 0
+    bottom 0
+
+.starting-room
+  background-color $gray-light
+  margin-top ($cell-side / -2)
+  margin-left ($cell-side / -2)

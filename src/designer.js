@@ -2,13 +2,14 @@ import React from 'react'
 import { connect } from 'nuclear-js-react-addons'
 
 import Toolbar from './toolbar'
+import Map from './map'
 
 class Designer extends React.Component {
   render() {
     return (
       <div className="main">
         <Toolbar />
-        <div id="map">Map</div>
+        <Map />
       </div>
     )
   }
