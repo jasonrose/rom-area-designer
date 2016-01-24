@@ -8,11 +8,15 @@ import Designer from './designer'
 
 import reactor from './reactor'
 import AreaStore from './area-store'
+import MobStore from './mob-store'
+import RoomStore from './room-store'
 import UiStateStore from './ui-state-store'
 
 reactor.registerStores({
   area: AreaStore,
-  uiState: UiStateStore
+  uiState: UiStateStore,
+  mobs: MobStore,
+  rooms: RoomStore
 })
 
 render((

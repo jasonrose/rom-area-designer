@@ -3,13 +3,16 @@ import { connect } from 'nuclear-js-react-addons'
 import classnames from 'classnames'
 import getters from './getters.js'
 import AreaToolbar from './area-toolbar'
+import MobsToolbar from './mobs-toolbar'
+import RoomsToolbar from './rooms-toolbar'
 import ToolbarTab from './toolbar-tab'
 
 class Toolbar extends React.Component {
   getActiveToolbarBody(selectedToolbarTab) {
     switch(selectedToolbarTab) {
       case 'area-tab': return <AreaToolbar />
-      default: return <div></div>
+      case 'mobs-tab': return <MobsToolbar />
+      case 'rooms-tab': return <RoomsToolbar />
     }
   }
 
