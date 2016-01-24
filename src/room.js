@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'nuclear-js-react-addons'
 import classnames from 'classnames'
-import getters from './getters.js'
+import getters from './getters'
 import actions from './actions.js'
 
 class Room extends React.Component {
@@ -60,7 +60,7 @@ class Room extends React.Component {
   }
 
   unlinkRoomWest() {
-    actions.unlinkRoom(this.props.room.get('id'), 4)
+    actions.unlinkRoom(this.props.room.get('id'), 3)
   }
 
   preventDefault(e) {
@@ -175,7 +175,8 @@ class Room extends React.Component {
     return (
       <div className={classNames}
            style={style}
-           onClick={this.onClick.bind(this)}>
+           onClick={this.onClick.bind(this)}
+           id={`room-${room.get('id')}`}>
         <span className="room-text">{room.get('id')}</span>
         {controls}
         {exits}

@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'nuclear-js-react-addons'
 import classnames from 'classnames'
-import getters from './getters.js'
+import getters from './getters'
 import Room from './room'
 
 class Map extends React.Component {
@@ -14,14 +14,34 @@ class Map extends React.Component {
 
   render() {
     const { rooms } = this.props
-    const cells = rooms.get('rooms').map(this.roomToCell)
+    let maxY = 0
+    let minY = 0
+    let maxX = 0
+    let minX = 0
+    const cells = []
+    rooms.get('rooms').forEach((room) => {
+      cells.push(this.roomToCell(room))
+      const coordinates = room.get('coordinates').toJS()
+      if(coordinates[0] < minX) {
+        minX = coordinates[0]
+      } else if(coordinates[0] > maxX) {
+        maxX = coordinates[0]
+      }
+      if(coordinates[1] < minY) {
+        minY = coordinates[0]
+      } else if(coordinates[1] > maxY) {
+        maxY = coordinates[1]
+      }
+    })
     const style = {
-      minHeight: 40 * 2 * rooms.size,
-      minWidth: 40 * 2 * rooms.size
+      minHeight: 2 * (60 * (maxY - minY + 1)) + 40,
+      minWidth: 2 * (60 * (maxX - minX + 1)) + 40
     }
     return (
-      <div id="map" style={style}>
-        {cells}
+      <div id="map">
+        <div className="cells" style={style}>
+          {cells}
+        </div>
       </div>
     )
   }

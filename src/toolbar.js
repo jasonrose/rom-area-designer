@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'nuclear-js-react-addons'
 import classnames from 'classnames'
-import getters from './getters.js'
+import getters from './getters'
 import AreaToolbar from './area-toolbar'
 import MobsToolbar from './mobs-toolbar'
 import RoomsToolbar from './rooms-toolbar'

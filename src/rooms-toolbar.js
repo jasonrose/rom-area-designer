@@ -1,11 +1,22 @@
 import React from 'react'
 import { connect } from 'nuclear-js-react-addons'
-import getters from './getters.js'
+import classnames from 'classnames'
+import getters from './getters'
+import actions from './actions'
 
 class RoomsToolbar extends React.Component {
+  selectRow(roomId) {
+    if(roomId === this.props.selectedRoomId) {
+      actions.selectRoom(null)
+    } else {
+      actions.selectRoom(roomId)
+    }
+  }
+
   toRow(entry, idx) {
+    const rowClassNames = classnames({selected: this.props.selectedRoomId === entry.get('id')})
     return (
-      <tr key={idx}>
+      <tr key={idx} className={rowClassNames} onClick={this.selectRow.bind(this, entry.get('id'))}>
         <td>
           {idx}
         </td>
@@ -18,9 +29,9 @@ class RoomsToolbar extends React.Component {
 
   render() {
     const { rooms } = this.props
-    const rows = rooms.get('rooms').map(this.toRow)
+    const rows = rooms.get('rooms').map(this.toRow.bind(this))
     return (
-      <table>
+      <table className="rooms-toolbar-table">
         <thead>
         <tr>
           <th>#</th>
@@ -37,7 +48,8 @@ class RoomsToolbar extends React.Component {
 
 function mapStateToProps(props) {
   return {
-    rooms: getters.rooms
+    rooms: getters.rooms,
+    selectedRoomId: getters.selectedRoomId
   }
 }
 

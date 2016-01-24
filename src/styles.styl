@@ -1,5 +1,8 @@
 @import 'yeticss'
 
+html, body
+  overflow hidden
+
 #root, .main
   min-height 100vh
   min-width 100vh
@@ -10,6 +13,8 @@
 
 #toolbar, #map
   padding 10px
+  max-height 100vh
+  overflow scroll
 
 #toolbar
   flex 0 0 20em
@@ -17,11 +22,12 @@
 
 #map
   flex 1
-  position relative
-  overflow auto
 
 $cell-side = 40px
 $cell-border-width = 2px
+
+.cells
+  position relative
 
 .room-cell
   width $cell-side
@@ -34,10 +40,6 @@ $cell-border-width = 2px
   user-select none
   top 50%
   left 50%
-
-  &.selected
-    border-color $orange
-    background-color $orange-lighter
 
   &.new-room
     border-color $blue-saturated-lighter
@@ -107,3 +109,11 @@ $exit-length = ($cell-side / 2 + 2px)
   background-color $gray-light
   margin-top ($cell-side / -2)
   margin-left ($cell-side / -2)
+
+.selected
+  border-color $orange
+  background-color $orange-lighter
+
+.rooms-toolbar-table
+  tr
+    cursor pointer

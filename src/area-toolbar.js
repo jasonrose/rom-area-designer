@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'nuclear-js-react-addons'
 import actions from './actions.js'
-import getters from './getters.js'
+import getters from './getters'
 
 
 class AreaToolbar extends React.Component {
