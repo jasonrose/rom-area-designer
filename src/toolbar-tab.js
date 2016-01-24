@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'nuclear-js-react-addons'
 import classnames from 'classnames'
 import getters from './getters'
-import actions from './actions.js'
+import actions from './actions'
 
 class ToolbarTab extends React.Component {
   handleClick(e) {

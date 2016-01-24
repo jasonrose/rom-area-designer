@@ -4,6 +4,7 @@ import actions from './action-types'
 export default Store({
   getInitialState() {
     return toImmutable({
+      version: 1,
       author: null,
       maximumLevel: 101,
       minimumLevel: 1,
@@ -16,6 +17,7 @@ export default Store({
     this.on(actions.SET_AREA_MAXIMUM_LEVEL, setMaximumLevel)
     this.on(actions.SET_AREA_MINIMUM_LEVEL, setMinimumLevel)
     this.on(actions.SET_AREA_NAME, setName)
+    this.on(actions.FINISH_IMPORT, doImport)
   }
 })
 
@@ -33,4 +35,8 @@ function setMinimumLevel(state, level) {
 
 function setName(state, name) {
   return state.set('name', name)
+}
+
+function doImport(state, json) {
+  return toImmutable(json.area)
 }

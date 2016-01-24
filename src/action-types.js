@@ -10,5 +10,9 @@ export default keyMirror({
   SET_AREA_NAME: null,
   SET_AREA_MINIMUM_LEVEL: null,
   SET_AREA_MAXIMUM_LEVEL: null,
-  SET_AREA_AUTHOR: null
+  SET_AREA_AUTHOR: null,
+  EXPORT: null,
+  IMPORT: null,
+  CANCEL_IMPORT: null,
+  FINISH_IMPORT: null
 })

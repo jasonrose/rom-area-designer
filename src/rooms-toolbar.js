@@ -13,12 +13,13 @@ class RoomsToolbar extends React.Component {
     }
   }
 
-  toRow(entry, idx) {
-    const rowClassNames = classnames({selected: this.props.selectedRoomId === entry.get('id')})
+  toRow(entry) {
+    const id = entry.get('id')
+    const rowClassNames = classnames({selected: this.props.selectedRoomId === id})
     return (
-      <tr key={idx} className={rowClassNames} onClick={this.selectRow.bind(this, entry.get('id'))}>
+      <tr key={id} className={rowClassNames} onClick={this.selectRow.bind(this, id)}>
         <td>
-          {idx}
+          {id}
         </td>
         <td>
           {entry.get('name')}

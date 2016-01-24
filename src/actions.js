@@ -46,5 +46,23 @@ export default {
 
   changeAreaAuthor(name) {
     reactor.dispatch(actionTypes.SET_AREA_AUTHOR, name)
+  },
+
+  doExport() {
+    const state = reactor.serialize()
+    const tab = window.open(`data:text/json,${encodeURIComponent(JSON.stringify(state, null, 2))}`, '_blank')
+    tab.focus()
+  },
+
+  doImport() {
+    reactor.dispatch(actionTypes.IMPORT)
+  },
+
+  cancelImport() {
+    reactor.dispatch(actionTypes.CANCEL_IMPORT)
+  },
+
+  finishImport(jsonStr) {
+    reactor.dispatch(actionTypes.FINISH_IMPORT, JSON.parse(jsonStr))
   }
 }
