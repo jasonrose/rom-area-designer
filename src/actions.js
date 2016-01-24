@@ -12,7 +12,6 @@ export default {
 
   addRoom(roomId, direction) {
     reactor.dispatch(actionTypes.ADD_ROOM, {roomId, direction})
-    reactor.dispatch(actionTypes.ROOM_SELECTED, null)
   },
 
   changeAreaName(name) {

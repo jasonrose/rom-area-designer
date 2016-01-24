@@ -41,5 +41,6 @@ function addRoom(state, {roomId, direction}) {
     , room => room.update('links', links => links.set(direction, newRoom.id))
     )
   })
-  return state.update('rooms', rooms => rooms.push(toImmutable(newRoom)))
+  state = state.update('rooms', rooms => rooms.push(toImmutable(newRoom)))
+  return state.set('selectedRoomId', newRoom.id)
 }
