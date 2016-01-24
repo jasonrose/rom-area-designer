@@ -39,6 +39,7 @@ export default Store({
     this.on(actionTypes.ADD_ROOM, addRoom)
     this.on(actionTypes.LINK_ROOM, linkRoom)
     this.on(actionTypes.UNLINK_ROOM, unlinkRoom)
+    this.on(actionTypes.REMOVE_ROOM, removeRoom)
   }
 })
 
@@ -102,4 +103,10 @@ function unlinkRoom(state, {roomId, direction}) {
     )
   })
   return state
+}
+
+function removeRoom(state, roomId) {
+  const index = state.get('rooms').findIndex(room => room.get('id') === roomId)
+  console.log('removing', index)
+  return state.updateIn(['rooms'], rooms => rooms.remove(index))
 }

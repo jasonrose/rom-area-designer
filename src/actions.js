@@ -22,6 +22,16 @@ export default {
     reactor.dispatch(actionTypes.UNLINK_ROOM, {roomId, direction})
   },
 
+  removeRoom(room) {
+    const roomId = room.get('id')
+    room.get('links').forEach((link, direction) => {
+      if(link !== null) {
+        reactor.dispatch(actionTypes.UNLINK_ROOM, {roomId, direction})
+      }
+    })
+    reactor.dispatch(actionTypes.REMOVE_ROOM, roomId)
+  },
+
   changeAreaName(name) {
     reactor.dispatch(actionTypes.SET_AREA_NAME, name)
   },

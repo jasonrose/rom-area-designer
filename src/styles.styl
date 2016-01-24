@@ -64,6 +64,17 @@ $cell-border-width = 2px
     margin-top ($cell-side * 1.5) - $cell-border-width
     margin-left -($cell-border-width)
 
+  &.remove-room
+    width ($cell-side / 2)
+    height ($cell-side / 2)
+    line-height ($cell-side / 2 - $cell-border-width * 3)
+    border-radius 50%
+    top initial
+    margin-top ($cell-side / -2 - $cell-border-width)
+    margin-left ($cell-side / -2 - $cell-border-width)
+    border-color $red
+    background-color $red-lighter
+
   .room-text
     position absolute
     top 0

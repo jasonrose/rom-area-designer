@@ -63,8 +63,20 @@ class Room extends React.Component {
     actions.unlinkRoom(this.props.room.get('id'), 3)
   }
 
+  removeRoom() {
+    actions.removeRoom(this.props.room)
+  }
+
   preventDefault(e) {
     e.stopPropagation()
+  }
+
+  createRemoveControl() {
+    return (
+      <div className="room-cell new-room remove-room" onClick={this.removeRoom.bind(this)}>
+        <span className="room-text">x</span>
+      </div>
+    )
   }
 
   createRoomControl(neighborhood, direction) {
@@ -139,6 +151,7 @@ class Room extends React.Component {
         {this.createRoomControl(neighborhood, 'east')}
         {this.createRoomControl(neighborhood, 'south')}
         {this.createRoomControl(neighborhood, 'west')}
+        {room.get('id') !== 0 ? this.createRemoveControl() : null}
       </div>
     )
   }
@@ -156,7 +169,7 @@ class Room extends React.Component {
   createExits(room) {
     const exits = room.get('links').map((link, index) => this.createExit(room, link, index))
     return (
-      <div className="room-actions" onClick={this.preventDefault}>
+      <div className="room-exits" onClick={this.preventDefault}>
         {exits}
       </div>
     )
