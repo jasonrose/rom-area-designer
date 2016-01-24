@@ -69,6 +69,40 @@ $cell-border-width = 2px
     right 0
     bottom 0
 
+$exit-length = ($cell-side / 2 + 2px)
+
+.room-exit
+  height 2px
+  width 2px
+  border: 2px solid black
+  position absolute
+
+  &.room-exit-0
+    left 50%
+    top -($exit-length)
+    height $exit-length
+    margin-left -2px
+
+  &.room-exit-1
+    right -($exit-length)
+    top 50%
+    width $exit-length
+    margin-left -2px
+    margin-top -2px
+
+  &.room-exit-2
+    left 50%
+    bottom -($exit-length)
+    height $exit-length
+    margin-left -2px
+
+  &.room-exit-3
+    left -($exit-length)
+    top 50%
+    width $exit-length
+    margin-top -2px
+
+
 .starting-room
   background-color $gray-light
   margin-top ($cell-side / -2)

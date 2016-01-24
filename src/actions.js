@@ -14,6 +14,14 @@ export default {
     reactor.dispatch(actionTypes.ADD_ROOM, {roomId, direction})
   },
 
+  linkRoom(roomId, direction) {
+    reactor.dispatch(actionTypes.LINK_ROOM, {roomId, direction})
+  },
+
+  unlinkRoom(roomId, direction) {
+    reactor.dispatch(actionTypes.UNLINK_ROOM, {roomId, direction})
+  },
+
   changeAreaName(name) {
     reactor.dispatch(actionTypes.SET_AREA_NAME, name)
   },
