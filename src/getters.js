@@ -5,6 +5,7 @@ const mobs = ['mobs']
 const selectedRoomId = ['rooms', 'selectedRoomId']
 const isExporting = ['uiState', 'isExporting']
 const isImporting = ['uiState', 'isImporting']
+const isEditingRoom = ['uiState', 'isEditingRoom']
 
 export default {
   area,
@@ -13,5 +14,6 @@ export default {
   rooms,
   selectedRoomId,
   isExporting,
-  isImporting
+  isImporting,
+  isEditingRoom
 }

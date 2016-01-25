@@ -22,12 +22,14 @@ html, body
 
 #map
   flex 1
+  padding 0 10px
 
 $cell-side = 40px
 $cell-border-width = 2px
 
 .cells
   position relative
+  height 90vh
 
 .room-cell
   width $cell-side
@@ -64,16 +66,25 @@ $cell-border-width = 2px
     margin-top ($cell-side * 1.5) - $cell-border-width
     margin-left -($cell-border-width)
 
-  &.remove-room
+  &.remove-room, &.edit-room
     width ($cell-side / 2)
     height ($cell-side / 2)
     line-height ($cell-side / 2 - $cell-border-width * 3)
     border-radius 50%
+
+  &.remove-room
     top initial
     margin-top ($cell-side / -2 - $cell-border-width)
     margin-left ($cell-side / -2 - $cell-border-width)
     border-color $red
     background-color $red-lighter
+
+  &.edit-room
+    top initial
+    margin-top ($cell-side / -2 - $cell-border-width)
+    right ($cell-side / -2 - $cell-border-width)
+    border-color $green
+    background-color $green-lighter
 
   .room-text
     position absolute
@@ -126,11 +137,30 @@ $exit-length = ($cell-side / 2 + 2px)
   background-color $orange-lighter
 
 .rooms-toolbar-table
+  table-layout fixed
+
   tr
     cursor pointer
+  td
+    text-overflow ellipsis
+    white-space nowrap
+    overflow hidden
 
-.modal-no-sections .cf .button
-  margin-left 20px
+  .number
+    width 3rem
+    text-align right
+
+  .name
+    width 13rem
+
+.modal.modal-no-sections
+  form
+    text-align left
+  .cf .button
+    margin-left 20px
 
 .import-text
   min-height 400px
+
+.room-description
+  min-height 100px

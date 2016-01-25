@@ -64,5 +64,17 @@ export default {
 
   finishImport(jsonStr) {
     reactor.dispatch(actionTypes.FINISH_IMPORT, JSON.parse(jsonStr))
+  },
+
+  startRoomEditor() {
+    reactor.dispatch(actionTypes.START_ROOM_EDITOR)
+  },
+
+  cancelRoomEditor() {
+    reactor.dispatch(actionTypes.CANCEL_ROOM_EDITOR)
+  },
+
+  finishRoomEditor(state) {
+    reactor.dispatch(actionTypes.FINISH_ROOM_EDITOR, state)
   }
 }

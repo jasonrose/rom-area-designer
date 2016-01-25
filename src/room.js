@@ -67,8 +67,20 @@ class Room extends React.Component {
     actions.removeRoom(this.props.room)
   }
 
+  editRoom() {
+    actions.startRoomEditor()
+  }
+
   preventDefault(e) {
     e.stopPropagation()
+  }
+
+  createEditControl() {
+    return (
+      <div className="room-cell new-room edit-room" onClick={this.editRoom.bind(this)}>
+        <span className="room-text">?</span>
+      </div>
+    )
   }
 
   createRemoveControl() {
@@ -152,6 +164,7 @@ class Room extends React.Component {
         {this.createRoomControl(neighborhood, 'south')}
         {this.createRoomControl(neighborhood, 'west')}
         {room.get('id') !== 0 ? this.createRemoveControl() : null}
+        {this.createEditControl()}
       </div>
     )
   }
@@ -182,8 +195,8 @@ class Room extends React.Component {
     const controls = isSelected ? this.createRoomControls(room) : null
     const exits = this.createExits(room)
     const style = {
-      marginTop: -60 * this.props.top,
-      marginLeft: 60 * this.props.left,
+      marginTop: -60 * this.props.top - 20,
+      marginLeft: 60 * this.props.left - 20,
     }
     return (
       <div className={classNames}

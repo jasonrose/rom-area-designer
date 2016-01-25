@@ -18,10 +18,10 @@ class RoomsToolbar extends React.Component {
     const rowClassNames = classnames({selected: this.props.selectedRoomId === id})
     return (
       <tr key={id} className={rowClassNames} onClick={this.selectRow.bind(this, id)}>
-        <td>
+        <td className="number">
           {id}
         </td>
-        <td>
+        <td className="name">
           {entry.get('name')}
         </td>
       </tr>
@@ -35,8 +35,8 @@ class RoomsToolbar extends React.Component {
       <table className="rooms-toolbar-table">
         <thead>
         <tr>
-          <th>#</th>
-          <th>Name</th>
+          <th className="number">#</th>
+          <th className="name">Name</th>
         </tr>
         </thead>
         <tbody>

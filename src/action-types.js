@@ -14,5 +14,8 @@ export default keyMirror({
   EXPORT: null,
   IMPORT: null,
   CANCEL_IMPORT: null,
-  FINISH_IMPORT: null
+  FINISH_IMPORT: null,
+  START_ROOM_EDITOR: null,
+  CANCEL_ROOM_EDITOR: null,
+  FINISH_ROOM_EDITOR: null
 })

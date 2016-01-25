@@ -6,7 +6,8 @@ export default Store({
     return toImmutable({
       selectedToolbarTab: 'area-tab',
       isExporting: false,
-      isImporting: false
+      isImporting: false,
+      isEditingRoom: false
     })
   },
 
@@ -15,7 +16,10 @@ export default Store({
     this.on(actionTypes.EXPORT, exportSelected)
     this.on(actionTypes.IMPORT, importSelected)
     this.on(actionTypes.CANCEL_IMPORT, cancelImport)
-    this.on(actionTypes.FINISH_IMPORT, finishImport)
+    this.on(actionTypes.FINISH_IMPORT, cancelImport)
+    this.on(actionTypes.START_ROOM_EDITOR, startRoomEditor)
+    this.on(actionTypes.CANCEL_ROOM_EDITOR, cancelRoomEditor)
+    this.on(actionTypes.FINISH_ROOM_EDITOR, cancelRoomEditor)
   }
 })
 
@@ -35,6 +39,10 @@ function cancelImport(state) {
   return state.set('isImporting', false)
 }
 
-function finishImport(state) {
-  return state.set('isImporting', false)
+function startRoomEditor(state) {
+  return state.set('isEditingRoom', true)
+}
+
+function cancelRoomEditor(state) {
+  return state.set('isEditingRoom', false)
 }

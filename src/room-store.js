@@ -41,6 +41,7 @@ export default Store({
     this.on(actionTypes.UNLINK_ROOM, unlinkRoom)
     this.on(actionTypes.REMOVE_ROOM, removeRoom)
     this.on(actionTypes.FINISH_IMPORT, doImport)
+    this.on(actionTypes.FINISH_ROOM_EDITOR, finishRoomEditor)
   }
 })
 
@@ -115,4 +116,13 @@ function doImport(state, json) {
   roomIdCounter = json.rooms.rooms.reduce(((acc, room) => room.id > acc ? room.id : acc), 0) + 1
   json.rooms.selectedRoomId = null
   return toImmutable(json.rooms)
+}
+
+function finishRoomEditor(state, roomProperties) {
+  return state.updateIn(['rooms'], rooms => {
+    return rooms.update(
+      rooms.findIndex(room => room.get('id') === state.get('selectedRoomId'))
+      , room => room.merge(roomProperties)
+    )
+  })
 }

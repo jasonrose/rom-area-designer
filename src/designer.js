@@ -4,13 +4,14 @@ import getters from './getters'
 import Toolbar from './toolbar'
 import Map from './map'
 import Importer from './importer'
+import RoomEditor from './room-editor'
 
 class Designer extends React.Component {
   render() {
     if(this.props.isImporting) {
-      return (
-        <Importer />
-      )
+      return <Importer />
+    } else if(this.props.isEditingRoom) {
+      return <RoomEditor />
     } else {
       return (
         <div className="main">
@@ -25,7 +26,8 @@ class Designer extends React.Component {
 function mapStateToProps(props) {
   return {
     isExporting: getters.isExporting,
-    isImporting: getters.isImporting
+    isImporting: getters.isImporting,
+    isEditingRoom: getters.isEditingRoom
   }
 }
 
