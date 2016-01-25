@@ -40,6 +40,7 @@ export default Store({
     this.on(actionTypes.LINK_ROOM, linkRoom)
     this.on(actionTypes.UNLINK_ROOM, unlinkRoom)
     this.on(actionTypes.REMOVE_ROOM, removeRoom)
+    this.on(actionTypes.FINISH_IMPORT, doImport)
   }
 })
 
@@ -107,6 +108,11 @@ function unlinkRoom(state, {roomId, direction}) {
 
 function removeRoom(state, roomId) {
   const index = state.get('rooms').findIndex(room => room.get('id') === roomId)
-  console.log('removing', index)
   return state.updateIn(['rooms'], rooms => rooms.remove(index))
+}
+
+function doImport(state, json) {
+  roomIdCounter = json.rooms.rooms.reduce(((acc, room) => room.id > acc ? room.id : acc), 0) + 1
+  json.rooms.selectedRoomId = null
+  return toImmutable(json.rooms)
 }

@@ -1,5 +1,5 @@
 import { Store, toImmutable } from 'nuclear-js'
-import actions from './action-types'
+import actionTypes from './action-types'
 
 export default Store({
   getInitialState() {
@@ -13,11 +13,11 @@ export default Store({
   },
 
   initialize() {
-    this.on(actions.SET_AREA_AUTHOR, setAuthor)
-    this.on(actions.SET_AREA_MAXIMUM_LEVEL, setMaximumLevel)
-    this.on(actions.SET_AREA_MINIMUM_LEVEL, setMinimumLevel)
-    this.on(actions.SET_AREA_NAME, setName)
-    this.on(actions.FINISH_IMPORT, doImport)
+    this.on(actionTypes.SET_AREA_AUTHOR, setAuthor)
+    this.on(actionTypes.SET_AREA_MAXIMUM_LEVEL, setMaximumLevel)
+    this.on(actionTypes.SET_AREA_MINIMUM_LEVEL, setMinimumLevel)
+    this.on(actionTypes.SET_AREA_NAME, setName)
+    this.on(actionTypes.FINISH_IMPORT, doImport)
   }
 })
 
