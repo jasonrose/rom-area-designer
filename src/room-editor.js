@@ -17,14 +17,11 @@ class RoomEditor extends React.Component {
     actions.cancelRoomEditor()
   }
 
-  changeName(e) {
-    this.state.name = e.target.value.trim()
-    this.setState(this.state)
-  }
-
-  changeDescription(e) {
-    this.state.description = e.target.value.trim()
-    this.setState(this.state)
+  genericCallback(key) {
+    return function(e) {
+      this.state[key] = e.target.value.trim()
+      this.setState(this.state)
+    }
   }
 
   render() {
@@ -40,7 +37,7 @@ class RoomEditor extends React.Component {
               <input id="room-name"
                      type="text"
                      className="form-input"
-                     onChange={this.changeName.bind(this)}
+                     onChange={this.genericCallback('name').bind(this)}
                      defaultValue={room.get('name')}>
               </input>
             </div>
@@ -48,13 +45,13 @@ class RoomEditor extends React.Component {
               <label htmlFor="room-description">Room Description</label>
               <textarea id="room-description"
                         className="form-input room-description"
-                        onChange={this.changeDescription.bind(this)}
+                        onChange={this.genericCallback('description').bind(this)}
                         defaultValue={room.get('description')}>
               </textarea>
             </div>
             <div className="cf">
-              <button className="button pull-right" onClick={this.doApply.bind(this)}>Apply</button>
-              <button className="button button-outlined-neutral pull-right" onClick={this.doCancel.bind(this)}>Cancel</button>
+              <button type="button" className="button pull-right" onClick={this.doApply.bind(this)}>Apply</button>
+              <button type="button" className="button button-outlined-neutral pull-right" onClick={this.doCancel.bind(this)}>Cancel</button>
             </div>
           </form>
         </div>

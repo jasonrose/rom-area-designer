@@ -1,4 +1,5 @@
 import { Store, toImmutable } from 'nuclear-js'
+import merge from 'lodash.assign'
 import actionTypes from './action-types'
 
 let roomIdCounter = 1
@@ -24,14 +25,33 @@ const directionToCoordinates = (coordinates, direction) => {
   }
 }
 
+function makeRoom(defaults) {
+  return merge({
+    id: 0,
+    name: 'New room',
+    links: [null, null, null, null, null, null],
+    coordinates: [0, 0, 0],
+    heal: 100,
+    mana: 100,
+    flags: [],
+    sector: 'city'
+  }, defaults)
+}
+
+function initialState() {
+  return toImmutable({
+    flags: 'dark fear gods_only heroes_only imp_only indoors law newbies_only nowhere no_gate no_mob no_recall no_summon no_teleport no_trans pet_shop private safe silence solitary'.split(' '),
+    rooms: [
+      makeRoom({name: 'Your starting room'})
+    ],
+    sectors: 'inside city field forest hills mountain swim noswim air desert underwater'.split(' '),
+    selectedRoomId: null
+  })
+}
+
 export default Store({
   getInitialState() {
-    return toImmutable({
-      rooms: [
-        {id: 0, name: 'Your starting room', links: [null, null, null, null, null, null], coordinates: [0, 0, 0]}
-      ],
-      selectedRoomId: null
-    })
+    return initialState()
   },
 
   initialize() {
@@ -50,9 +70,11 @@ function selectRoom(state, roomId) {
 }
 
 function addRoom(state, {roomId, direction}) {
-  const newRoom = {id: roomIdCounter++, name: 'New room', links: [null, null, null, null, null, null]}
+  const newRoom = makeRoom({
+    id: roomIdCounter++,
+    coordinates: directionToCoordinates(state.get('rooms').find(room => room.get('id') === roomId).get('coordinates'), direction)
+  })
   newRoom.links[roomDirectionMap[direction]] = roomId
-  newRoom.coordinates = directionToCoordinates(state.get('rooms').find(room => room.get('id') === roomId).get('coordinates'), direction)
   state = state.updateIn(['rooms'], rooms => {
     return rooms.update(
       rooms.findIndex(room => room.get('id') === roomId)
@@ -114,8 +136,8 @@ function removeRoom(state, roomId) {
 
 function doImport(state, json) {
   roomIdCounter = json.rooms.rooms.reduce(((acc, room) => room.id > acc ? room.id : acc), 0) + 1
-  json.rooms.selectedRoomId = null
-  return toImmutable(json.rooms)
+  json.rooms.rooms = json.rooms.rooms.map(makeRoom)
+  return initialState().merge({rooms: json.rooms.rooms})
 }
 
 function finishRoomEditor(state, roomProperties) {
