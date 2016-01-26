@@ -31,6 +31,14 @@ class Room extends React.Component {
     actions.addRoom(this.props.room.get('id'), 3)
   }
 
+  addRoomUp() {
+    actions.addRoom(this.props.room.get('id'), 4)
+  }
+
+  addRoomDown() {
+    actions.addRoom(this.props.room.get('id'), 5)
+  }
+
   linkRoomNorth() {
     actions.linkRoom(this.props.room.get('id'), 0)
   }
@@ -47,6 +55,14 @@ class Room extends React.Component {
     actions.linkRoom(this.props.room.get('id'), 3)
   }
 
+  linkRoomUp() {
+    actions.linkRoom(this.props.room.get('id'), 4)
+  }
+
+  linkRoomDown() {
+    actions.linkRoom(this.props.room.get('id'), 5)
+  }
+
   unlinkRoomNorth() {
     actions.unlinkRoom(this.props.room.get('id'), 0)
   }
@@ -61,6 +77,14 @@ class Room extends React.Component {
 
   unlinkRoomWest() {
     actions.unlinkRoom(this.props.room.get('id'), 3)
+  }
+
+  unlinkRoomUp() {
+    actions.unlinkRoom(this.props.room.get('id'), 4)
+  }
+
+  unlinkRoomDown() {
+    actions.unlinkRoom(this.props.room.get('id'), 5)
   }
 
   removeRoom() {
@@ -163,6 +187,8 @@ class Room extends React.Component {
         {this.createRoomControl(neighborhood, 'east')}
         {this.createRoomControl(neighborhood, 'south')}
         {this.createRoomControl(neighborhood, 'west')}
+        {this.createRoomControl(neighborhood, 'up')}
+        {this.createRoomControl(neighborhood, 'down')}
         {room.get('id') !== 0 ? this.createRemoveControl() : null}
         {this.createEditControl()}
       </div>

@@ -1,5 +1,6 @@
 import reactor from './reactor'
 import actionTypes from './action-types'
+import getters from './getters'
 
 export default {
   selectToolbarTab(areaName) {
@@ -8,10 +9,18 @@ export default {
 
   selectRoom(roomId) {
     reactor.dispatch(actionTypes.ROOM_SELECTED, roomId)
+    if(roomId !== null) {
+      const rooms = reactor.evaluate(getters.rooms).get('rooms')
+      const room = rooms.find(room => room.get('id') === roomId)
+      reactor.dispatch(actionTypes.SELECT_FLOOR, room.get('coordinates').get(2))
+    }
   },
 
   addRoom(roomId, direction) {
     reactor.dispatch(actionTypes.ADD_ROOM, {roomId, direction})
+    const rooms = reactor.evaluate(getters.rooms).get('rooms')
+    const coordinates = rooms.last().get('coordinates')
+    reactor.dispatch(actionTypes.SELECT_FLOOR, coordinates.get(2))
   },
 
   linkRoom(roomId, direction) {
@@ -76,5 +85,9 @@ export default {
 
   finishRoomEditor(state) {
     reactor.dispatch(actionTypes.FINISH_ROOM_EDITOR, state)
+  },
+
+  selectFloor(floor) {
+    reactor.dispatch(actionTypes.SELECT_FLOOR, floor)
   }
 }

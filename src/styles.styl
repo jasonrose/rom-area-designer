@@ -12,17 +12,25 @@ html, body
   flex-flow row wrap
 
 #toolbar, #map
-  padding 10px
   max-height 100vh
   overflow scroll
 
 #toolbar
   flex 0 0 20em
-  border-right 3px solid $gray-lighter
+  padding 10px
 
 #map
   flex 1
-  padding 0 10px
+
+.floors
+  padding 10px
+  background-color $gray-lighter
+
+  .button
+    margin-left 10px
+
+.flip
+  transform rotate(180deg)
 
 $cell-side = 40px
 $cell-border-width = 2px
@@ -66,6 +74,14 @@ $cell-border-width = 2px
     margin-top ($cell-side * 1.5) - $cell-border-width
     margin-left -($cell-border-width)
 
+  &.room-up
+    margin-left ($cell-side * 1.5) - $cell-border-width
+    margin-top -($cell-side * 1.5) - $cell-border-width
+
+  &.room-down
+    margin-left ($cell-side * 1.5) - $cell-border-width
+    margin-top ($cell-side * 1.5) - $cell-border-width
+
   &.remove-room, &.edit-room
     width ($cell-side / 2)
     height ($cell-side / 2)
@@ -81,8 +97,8 @@ $cell-border-width = 2px
 
   &.edit-room
     top initial
-    margin-top ($cell-side / -2 - $cell-border-width)
-    right ($cell-side / -2 - $cell-border-width)
+    margin-top ($cell-side - $cell-border-width)
+    margin-left ($cell-side / -2 - $cell-border-width)
     border-color $green
     background-color $green-lighter
 
@@ -126,6 +142,23 @@ $exit-length = ($cell-side / 2 + 2px)
     width $exit-length
     margin-top -2px
 
+  &.room-exit-4
+    width ($exit-length / 2)
+    height ($exit-length / 2)
+    border none
+    border-bottom 4px solid black
+    border-right 4px solid black
+    right -($exit-length / 2)
+    top ($exit-length / -2 + 5)
+
+  &.room-exit-5
+    width ($exit-length / 2)
+    height ($exit-length / 2)
+    border none
+    border-top 4px solid black
+    border-right 4px solid black
+    right -($exit-length / 2)
+    bottom ($exit-length / -2 + 5)
 
 .starting-room
   background-color $gray-light
@@ -164,3 +197,13 @@ $exit-length = ($cell-side / 2 + 2px)
 
 .room-description
   min-height 100px
+
+.button
+  &:focus
+    background-color darken($blue, 30%)
+
+.button-outlined-neutral
+  &:focus
+    background-color white
+    border-color $gray
+    color $gray-dark

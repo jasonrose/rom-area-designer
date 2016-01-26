@@ -7,7 +7,8 @@ export default Store({
       selectedToolbarTab: 'area-tab',
       isExporting: false,
       isImporting: false,
-      isEditingRoom: false
+      isEditingRoom: false,
+      floor: 0
     })
   },
 
@@ -20,6 +21,7 @@ export default Store({
     this.on(actionTypes.START_ROOM_EDITOR, startRoomEditor)
     this.on(actionTypes.CANCEL_ROOM_EDITOR, cancelRoomEditor)
     this.on(actionTypes.FINISH_ROOM_EDITOR, cancelRoomEditor)
+    this.on(actionTypes.SELECT_FLOOR, selectFloor)
   }
 })
 
@@ -45,4 +47,8 @@ function startRoomEditor(state) {
 
 function cancelRoomEditor(state) {
   return state.set('isEditingRoom', false)
+}
+
+function selectFloor(state, floor) {
+  return state.set('floor', floor)
 }

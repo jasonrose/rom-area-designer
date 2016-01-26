@@ -52,11 +52,11 @@ class RoomEditor extends React.Component {
                         defaultValue={room.get('description')}>
               </textarea>
             </div>
+            <div className="cf">
+              <button className="button pull-right" onClick={this.doApply.bind(this)}>Apply</button>
+              <button className="button button-outlined-neutral pull-right" onClick={this.doCancel.bind(this)}>Cancel</button>
+            </div>
           </form>
-          <div className="cf">
-            <a className="button pull-right" onClick={this.doApply.bind(this)}>Apply</a>
-            <a className="button button-outlined-neutral pull-right" onClick={this.doCancel.bind(this)}>Cancel</a>
-          </div>
         </div>
       </div>
     )

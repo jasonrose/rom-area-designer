@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'nuclear-js-react-addons'
 import classnames from 'classnames'
 import getters from './getters'
+import Floors from './floors'
 import Room from './room'
 
 class Map extends React.Component {
@@ -20,8 +21,11 @@ class Map extends React.Component {
     let minX = 0
     const cells = []
     rooms.get('rooms').forEach((room) => {
-      cells.push(this.roomToCell(room))
       const coordinates = room.get('coordinates').toJS()
+      if(coordinates[2] !== this.props.floor) {
+        return
+      }
+      cells.push(this.roomToCell(room))
       if(coordinates[0] < minX) {
         minX = coordinates[0]
       } else if(coordinates[0] > maxX) {
@@ -39,6 +43,7 @@ class Map extends React.Component {
     }
     return (
       <div id="map">
+        <Floors />
         <div className="cells" style={style}>
           {cells}
         </div>
@@ -49,7 +54,8 @@ class Map extends React.Component {
 
 function mapStateToProps(props) {
   return {
-    rooms: getters.rooms
+    rooms: getters.rooms,
+    floor: getters.floor
   }
 }
 

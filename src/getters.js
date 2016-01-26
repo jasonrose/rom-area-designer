@@ -6,6 +6,7 @@ const selectedRoomId = ['rooms', 'selectedRoomId']
 const isExporting = ['uiState', 'isExporting']
 const isImporting = ['uiState', 'isImporting']
 const isEditingRoom = ['uiState', 'isEditingRoom']
+const floor = ['uiState', 'floor']
 
 export default {
   area,
@@ -15,5 +16,6 @@ export default {
   selectedRoomId,
   isExporting,
   isImporting,
-  isEditingRoom
+  isEditingRoom,
+  floor
 }
