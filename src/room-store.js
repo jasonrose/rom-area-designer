@@ -44,7 +44,7 @@ function initialState() {
     rooms: [
       makeRoom({name: 'Your starting room'})
     ],
-    sectors: 'inside city field forest hills mountain swim noswim air desert underwater'.split(' '),
+    sectors: 'air city desert field forest hills inside mountain noswim swim underwater'.split(' '),
     selectedRoomId: null
   })
 }

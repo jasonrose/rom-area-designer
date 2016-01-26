@@ -2,6 +2,7 @@
 
 html, body
   overflow hidden
+  line-height initial
 
 #root, .main
   min-height 100vh
@@ -189,8 +190,14 @@ $exit-length = ($cell-side / 2 + 2px)
     width 13rem
 
 .modal.modal-no-sections
+  padding 20px
+
   form
     text-align left
+
+  h1, h2, h3, h4, h5, h6
+    margin-bottom 15px
+
   .cf .button
     margin-left 20px
 
@@ -209,3 +216,13 @@ $exit-length = ($cell-side / 2 + 2px)
     background-color white
     border-color $gray
     color $gray-dark
+
+.form-inline
+  margin-bottom 15px
+
+  .form-element.input-checkbox:not(:first-of-type)
+    padding-left 0
+
+@media screen and (min-width: 768px)
+  .form-inline .input-checkbox.form-element
+    width 33.3333333%

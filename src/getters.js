@@ -1,6 +1,8 @@
 const area = ['area']
 const uiState = ['uiState']
 const rooms = ['rooms']
+const roomSectors = ['rooms', 'sectors']
+const roomFlags = ['rooms', 'flags']
 const mobs = ['mobs']
 const selectedRoomId = ['rooms', 'selectedRoomId']
 const isExporting = ['uiState', 'isExporting']
@@ -13,6 +15,8 @@ export default {
   uiState,
   mobs,
   rooms,
+  roomSectors,
+  roomFlags,
   selectedRoomId,
   isExporting,
   isImporting,
