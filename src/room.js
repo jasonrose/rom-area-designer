@@ -196,7 +196,7 @@ class Room extends React.Component {
   }
 
   createExit(room, link, index) {
-    if(!link) {
+    if(link === null) {
       return
     }
     const classNames = classnames('room-exit', `room-exit-${index}`)
