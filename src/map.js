@@ -38,8 +38,8 @@ class Map extends React.Component {
       }
     })
     const style = {
-      minHeight: 2 * (60 * (maxY - minY + 1)) + 40,
-      minWidth: 2 * (60 * (maxX - minX + 1)) + 40
+      minHeight: 2 * (80 * (maxY - minY + 1)) + 40,
+      minWidth: 2 * (80 * (maxX - minX + 1)) + 40
     }
     return (
       <div id="map">

@@ -26,6 +26,7 @@ html, body
 .floors
   padding 10px
   background-color $gray-lighter
+  display inline-block
 
   .button
     margin-left 10px
@@ -60,28 +61,28 @@ $cell-border-width = 2px
     z-index 1
 
   &.room-west
-    margin-left ($cell-side * -1.5) - $cell-border-width
+    margin-left ($cell-side * -2) - $cell-border-width
     margin-top -($cell-border-width)
 
   &.room-east
-    margin-left ($cell-side * 1.5) - $cell-border-width
+    margin-left ($cell-side * 2) - $cell-border-width
     margin-top -($cell-border-width)
 
   &.room-north
-    margin-top -($cell-side * 1.5) - $cell-border-width
+    margin-top -($cell-side * 2) - $cell-border-width
     margin-left -($cell-border-width)
 
   &.room-south
-    margin-top ($cell-side * 1.5) - $cell-border-width
+    margin-top ($cell-side * 2) - $cell-border-width
     margin-left -($cell-border-width)
 
   &.room-up
-    margin-left ($cell-side * 1.5) - $cell-border-width
-    margin-top -($cell-side * 1.5) - $cell-border-width
+    margin-left ($cell-side * 2) - $cell-border-width
+    margin-top -($cell-side * 2) - $cell-border-width
 
   &.room-down
-    margin-left ($cell-side * 1.5) - $cell-border-width
-    margin-top ($cell-side * 1.5) - $cell-border-width
+    margin-left ($cell-side * 2) - $cell-border-width
+    margin-top ($cell-side * 2) - $cell-border-width
 
   &.remove-room, &.edit-room
     width ($cell-side / 2)
@@ -110,7 +111,18 @@ $cell-border-width = 2px
     right 0
     bottom 0
 
-$exit-length = ($cell-side / 2 + 2px)
+.room-actions
+  position absolute
+  top 0
+  left 0
+  right 0
+  bottom 0
+  pointer-events none
+
+  > *
+    pointer-events auto
+
+$exit-length = ($cell-side + 2px)
 
 .room-exit
   height 2px
@@ -162,6 +174,72 @@ $exit-length = ($cell-side / 2 + 2px)
     border-right 4px solid black
     right -($exit-length / 2)
     bottom ($exit-length / -2 + 5)
+
+$door-cell-length = ($cell-side / 3 + 2px)
+
+.door-cell
+  width $door-cell-length
+  height $door-cell-length
+  border $cell-border-width solid black
+  position absolute
+  cursor pointer
+  user-select none
+  background-color white
+  z-index 1
+
+  &.door-north
+    top -($cell-side / 2 + $door-cell-length / 2)
+    left ($cell-side / 2 - $door-cell-length / 2 - $cell-border-width)
+
+  &.door-east
+    top ($cell-side / 2 - $door-cell-length / 2 - $cell-border-width)
+    left ($cell-side * 1.5 - $door-cell-length / 2 - $cell-border-width)
+
+  &.door-south
+    top ($cell-side * 1.5 - $door-cell-length / 2 - $cell-border-width)
+    left ($cell-side / 2 - $door-cell-length / 2 - $cell-border-width)
+
+  &.door-west
+    top ($cell-side / 2 - $door-cell-length / 2 - $cell-border-width)
+    left -($cell-side / 2 + $door-cell-length / 2)
+
+  &.door-up
+    top -($exit-length / 2)
+    right -($exit-length / 2 + $door-cell-length / 2 - $cell-border-width)
+
+  &.door-down
+    bottom -($exit-length / 2)
+    right -($exit-length / 2 + $door-cell-length / 2 - $cell-border-width)
+
+  &.door-open
+    background-color white
+
+  &.door-closed
+    background-color black
+
+  &.door-south.door-open, &.door-south.door-closed
+    height ($door-cell-length / 2)
+    margin-top ($door-cell-length / 4)
+
+  &.door-north.door-open, &.door-north.door-closed
+    height ($door-cell-length / 2)
+    margin-top ($door-cell-length / 8)
+
+  &.door-east.door-open, &.door-east.door-closed
+    width ($door-cell-length / 2)
+    margin-left ($door-cell-length / 4)
+
+  &.door-west.door-open, &.door-west.door-closed
+    width ($door-cell-length / 2)
+    margin-left ($door-cell-length / 8)
+
+  &.door-up.door-open, &.door-up.door-closed
+    height ($door-cell-length / 2)
+    margin-top ($door-cell-length / 8)
+
+  &.door-down.door-open, &.door-down.door-closed
+    height ($door-cell-length / 2)
+    margin-top ($door-cell-length / 8)
 
 .starting-room
   background-color $gray-light

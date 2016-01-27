@@ -7,6 +7,7 @@ export default keyMirror({
   LINK_ROOM: null,
   UNLINK_ROOM: null,
   REMOVE_ROOM: null,
+  TOGGLE_DOOR: null,
   SET_AREA_NAME: null,
   SET_AREA_MINIMUM_LEVEL: null,
   SET_AREA_MAXIMUM_LEVEL: null,

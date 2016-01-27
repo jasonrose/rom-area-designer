@@ -41,6 +41,10 @@ export default {
     reactor.dispatch(actionTypes.REMOVE_ROOM, roomId)
   },
 
+  toggleDoor(roomId, direction) {
+    reactor.dispatch(actionTypes.TOGGLE_DOOR, {roomId, direction})
+  },
+
   changeAreaName(name) {
     reactor.dispatch(actionTypes.SET_AREA_NAME, name)
   },

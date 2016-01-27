@@ -30,6 +30,7 @@ function makeRoom(defaults) {
     id: 0,
     name: 'New room',
     links: [null, null, null, null, null, null],
+    doors: [0, 0, 0, 0, 0, 0],
     coordinates: [0, 0, 0],
     heal: 100,
     mana: 100,
@@ -60,6 +61,7 @@ export default Store({
     this.on(actionTypes.LINK_ROOM, linkRoom)
     this.on(actionTypes.UNLINK_ROOM, unlinkRoom)
     this.on(actionTypes.REMOVE_ROOM, removeRoom)
+    this.on(actionTypes.TOGGLE_DOOR, toggleDoor)
     this.on(actionTypes.FINISH_IMPORT, doImport)
     this.on(actionTypes.FINISH_ROOM_EDITOR, finishRoomEditor)
   }
@@ -117,13 +119,20 @@ function unlinkRoom(state, {roomId, direction}) {
   state = state.updateIn(['rooms'], rooms => {
     return rooms.update(
       rooms.findIndex(room => room.get('id') === roomId)
-      , room => room.update('links', links => links.set(direction, null))
+      , room => {
+        room = room.update('links', links => links.set(direction, null))
+        return room.update('doors', doors => doors.set(direction, 0))
+      }
     )
   })
   state = state.updateIn(['rooms'], rooms => {
     return rooms.update(
       rooms.findIndex(room => room.get('id') === targetRoom.get('id'))
-      , room => room.update('links', links => links.set(roomDirectionMap[direction], null))
+      , room => {
+        const newDirection = roomDirectionMap[direction]
+        room = room.update('links', links => links.set(newDirection, null))
+        return room.update('doors', doors => doors.set(newDirection, 0))
+      }
     )
   })
   return state
@@ -132,6 +141,28 @@ function unlinkRoom(state, {roomId, direction}) {
 function removeRoom(state, roomId) {
   const index = state.get('rooms').findIndex(room => room.get('id') === roomId)
   return state.updateIn(['rooms'], rooms => rooms.remove(index))
+}
+
+function toggleDoor(state, {roomId, direction}) {
+  const room = state.get('rooms').find(room => room.get('id') === roomId)
+  const targetRoomCoordinates = directionToCoordinates(room.get('coordinates'), direction)
+  const targetRoom = state.get('rooms').find(room => {
+    const coords = room.get('coordinates').toJS()
+    return targetRoomCoordinates[0] === coords[0] && targetRoomCoordinates[1] === coords[1] && targetRoomCoordinates[2] === coords[2]
+  })
+  state = state.updateIn(['rooms'], rooms => {
+    return rooms.update(
+      rooms.findIndex(room => room.get('id') === roomId)
+      , room => room.updateIn(['doors', direction], door => (door + 1) % 3)
+    )
+  })
+  state = state.updateIn(['rooms'], rooms => {
+    return rooms.update(
+      rooms.findIndex(room => room.get('id') === targetRoom.get('id'))
+      , room => room.updateIn(['doors', roomDirectionMap[direction]], door => (door + 1) % 3)
+    )
+  })
+  return state
 }
 
 function doImport(state, json) {
